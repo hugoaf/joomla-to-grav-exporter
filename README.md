@@ -12,6 +12,9 @@ After installation go to Joomla Administrator Components > J2Grav.
 
 Read and fill the parameters shown in form and when click "Export Now" button, the plugin will get Joomla articles title, alias, category and tags, then will create a folder and markdown files for every article in your Joomla installation and will create a folder and markdown file for corresponding joomla category in the Grav style.
 
+![j2grav-form.png](j2grav-form.png)
+![j2grav-results.png](j2grav-results.png)
+
 *Will not create nested categories
 
 Browse your server and download your Grav pages, will be stored in: `/administrator/components/com_j2grav/exported`
