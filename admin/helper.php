@@ -1,9 +1,8 @@
 <?php
 /**
- * @version     1.0.1
- * @package     com_rda
+ * @version     0.1.0
+ * @package     com_j2grav
  * @copyright   Copyright (C) 2011. All rights reserved.
- * @license     Private
  * @author      Created by Hugo Avila
  */
 
@@ -11,7 +10,7 @@
 defined('_JEXEC') or die;
 
 /**
- * Rda helper.
+ * J2Grav helper.
  */
 class J2gravHelper
 {
