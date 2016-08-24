@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.0" method="upgrade">
+	<name>com_j2grav</name>
+	<author>Hugo Avila</author>
+	<creationDate>Agosto 2016</creationDate>
+	<copyright>(C) Hugo Avila. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>hugoavila@sitioi.com</authorEmail>
+	<authorUrl>www.sitioi.com</authorUrl>
+	<version>0.1.0</version>
+	<description>Export Joomla Category and Articles to GRAV files</description>
+	<administration>
+		<menu link="index.php?option=com_j2grav">J2Grav</menu>
+		<files folder="admin">
+			<filename>index.html</filename>
+			<filename>j2grav.php</filename>
+			<filename>controller.php</filename>
+			<filename>helper.php</filename>
+			<folder>views</folder>
+		</files>
+	</administration>
+</extension>
