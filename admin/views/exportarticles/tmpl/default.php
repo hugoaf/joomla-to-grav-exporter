@@ -1,4 +1,11 @@
 <?php
+/**
+ * @version     0.2.0
+ * @package     com_j2grav
+ * @copyright   Copyright (C) 2011. All rights reserved.
+ * @license     GNU/GPL
+ * @author      Hugo Avila
+ */
  
 // No direct access
  

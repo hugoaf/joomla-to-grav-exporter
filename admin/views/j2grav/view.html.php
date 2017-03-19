@@ -1,10 +1,11 @@
 <?php
 /**
- * @package    Joomla.Tutorials
- * @subpackage Components
- * @link http://docs.joomla.org/Developing_a_Model-View-Controller_Component_-_Part_1
- * @license    GNU/GPL
-*/
+ * @version     0.2.0
+ * @package     com_j2grav
+ * @copyright   Copyright (C) 2011. All rights reserved.
+ * @license     GNU/GPL
+ * @author      Hugo Avila
+ */
  
 // no direct access
  

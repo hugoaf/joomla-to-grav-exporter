@@ -17,6 +17,7 @@
 			<filename>controller.php</filename>
 			<filename>helper.php</filename>
 			<folder>views</folder>
+			<folder>vendor</folder>
 		</files>
 	</administration>
 </extension>

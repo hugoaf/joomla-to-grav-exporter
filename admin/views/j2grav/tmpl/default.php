@@ -1,4 +1,11 @@
 <?php
+/**
+ * @version     0.2.0
+ * @package     com_j2grav
+ * @copyright   Copyright (C) 2011. All rights reserved.
+ * @license     GNU/GPL
+ * @author      Hugo Avila
+ */
  
 // No direct access
  
@@ -13,8 +20,11 @@ defined('_JEXEC') or die('Restricted access'); ?>
 </div>
 
 
-<form action="index.php?option=com_j2grav&view=exportarticles">
+<form action="index.php?option=com_j2grav">
 
+	<input name="option" value="com_j2grav" type="hidden">
+	<input name="view" value="exportarticles" type="hidden">
+	
 	<label><b>Grav Template for articles?</b></label>
 	<input type="text" name="article_template" value="item" />.md
 
@@ -30,14 +40,14 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	<label><b>Manually Set Language?</b> If above is set to no, you can manually set one of your language code "es", "en", etc. (without quotes) to be applied to all your files, if no need just leave empty</label>
 	<input type="text" name="language" value="" /> 
 
-	<label><b>Strip HTML tags?</b> your Joomla articles have html tags for sure, and they are markdown compatible, but maybe you want to get rid of them. </label> 
-	<select name="strip_tags" >
-		<option value="0">No</option>
-		<option value="1">Yes</option>
+
+	<label><b>Content Format?</b> you could just leave the content as it is in joomla database, or Strip HTML tags, or convert to Markdown with the Markdownify library from https://github.com/Elephant418/Markdownify</label> 
+	<select name="content_format" >
+		<option value="html">Do not alter format</option>
+		<option value="strip_tags">Strip HTML Tags</option>
+		<option value="markdownify">Markdownify</option>
 	</select> 
 
-	<input name="option" value="com_j2grav" type="hidden">
-	<input name="view" value="exportarticles" type="hidden">
 <br>
 	<input class="btn btn-large btn-primary" type="submit" value="Export Now" />
 
