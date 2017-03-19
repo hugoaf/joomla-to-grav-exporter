@@ -26,6 +26,9 @@ class J2gravHelper
 		$db->setQuery($query);
 		$datos = $db->loadAssocList();
 
+		jimport('joomla.filesystem.folder');
+		jimport('joomla.filesystem.file');
+		
 		if(!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 		
 		/*
