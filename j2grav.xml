@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>hugoavila@sitioi.com</authorEmail>
 	<authorUrl>www.sitioi.com</authorUrl>
-	<version>0.1.0</version>
+	<version>0.3.0</version>
 	<description>Export Joomla Category and Articles to GRAV files</description>
 	<administration>
 		<menu link="index.php?option=com_j2grav">J2Grav</menu>
