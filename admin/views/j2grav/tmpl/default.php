@@ -38,8 +38,6 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	
 	<label><input type="checkbox" name="force_visibility_category" /> <b>Force visibility for all categories</b></label>
 
-	<label><input type="checkbox" name="force_visibility_category" /> <b>Force visibility for all categories</b></label>
-
 	<label><input type="checkbox" name="use_article_language" /> <b>Use Joomla Language Tag?</b> If your Joomla article has language, use it to create markdown file ie. default.<b>es</b>.md? </label> 
 
 
