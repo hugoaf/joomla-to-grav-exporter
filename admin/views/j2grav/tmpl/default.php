@@ -14,6 +14,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <H1>Joomla to GRAV Exporter</H1>
 <div class="alert alert-info">
 	<p>When click "Export Now" button, the plugin will get Joomla articles title, alias, category and tags, then will create a folder and markdown files for every article in your Joomla installation and will create a folder and markdown file for corresponding joomla category in the grav style.</p>
+	<p>* If you already exported your joomla files to grav, you should download and remove exported files, when using again it will not overwrite current exported	files.*</p>
 	<p>* Will not create nested categories *</p>
 	<p>Your GRAV pages will be stored in: <pre>/administrator/components/com_j2grav/exported</pre></p>
 	<p>When finished you should remove this component completely.</p>
@@ -31,21 +32,16 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	<label><b>Grav Template for categories?</b></label>
 	<input type="text" name="category_template" value="blog" />.md
 
-	<label><b>Import Joomla Article Tags</b></label>
-	<input type="checkbox" name="import_tags" />
+	<label><input type="checkbox" name="import_tags" /><b>Import Joomla Article Tags</b></label>
+	
+	<label><input type="checkbox" name="force_visibility_article" /> <b>Force visibility for all articles</b></label>
+	
+	<label><input type="checkbox" name="force_visibility_category" /> <b>Force visibility for all categories</b></label>
 
-	<label><b>Force visibility for all articles</b></label>
-	<input type="checkbox" name="force_visibility_article" />
+	<label><input type="checkbox" name="force_visibility_category" /> <b>Force visibility for all categories</b></label>
 
-	<label><b>Force visibility for all categories</b></label>
-	<input type="checkbox" name="force_visibility_category" />
+	<label><input type="checkbox" name="use_article_language" /> <b>Use Joomla Language Tag?</b> If your Joomla article has language, use it to create markdown file ie. default.<b>es</b>.md? </label> 
 
-
-	<label><b>Joomla Language Tag?</b> If your Joomla article has language use it to create markdown file ie. default.<b>es</b>.md? </label> 
-	<select name="use_article_language" >
-		<option value="0">No</option>
-		<option value="1" selected="selected">Yes</option>
-	</select> 
 
 	<label><b>Manually Set Language?</b> If above is set to no, you can manually set one of your language code "es", "en", etc. (without quotes) to be applied to all your files, if no need just leave empty</label>
 	<input type="text" name="language" value="" /> 
