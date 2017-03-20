@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     0.2.0
+ * @version     0.3.0
  * @package     com_j2grav
  * @copyright   Copyright (C) 2011. All rights reserved.
  * @license     GNU/GPL
@@ -28,16 +28,19 @@ class J2gravHelper
 		$jinput = JFactory::getApplication()->input;
 
 		$export_folder_name = 'exported'.DS.'pages';
-		$category_template = $jinput->get('category_template', 'default', 'ALNUM');
-		$article_template = $jinput->get('article_template', 'default', 'ALNUM');
+		$category_template = $jinput->get('category_template', 'default', 'WORD');
+		$article_template = $jinput->get('article_template', 'default', 'WORD');
 		//$strip_tags = $jinput->get('strip_tags', 0, 'BOOLEAN');
 		$content_format = $jinput->get('content_format', 'html', 'WORD');
 		$use_article_language = $jinput->get('use_article_language', 0, 'BOOLEAN');
+		$import_tags = $jinput->get('import_tags', 0, 'BOOLEAN');
+		$force_visibility_article = $jinput->get('force_visibility_article', 0, 'BOOLEAN');
+		$force_visibility_category = $jinput->get('force_visibility_category', 0, 'BOOLEAN');
 		$language = $jinput->get('language', '', 'WORD');
 
 		if ( $content_format == 'markdownify') {
-			require_once( JPATH_COMPONENT.'\vendor\markdownify\src\Markdownify\Converter.php' );
-			require_once( JPATH_COMPONENT.'\vendor\markdownify\src\Markdownify\Parser.php' );
+			require_once( JPATH_COMPONENT.DS.'vendor'.DS.'markdownify'.DS.''.DS.'src'.DS.'Markdownify'.DS.'Converter.php' );
+			require_once( JPATH_COMPONENT.DS.'vendor'.DS.'markdownify'.DS.''.DS.'src'.DS.'Markdownify'.DS.'Parser.php' );
 			$converter = new Markdownify\Converter;
 
 		}
@@ -98,7 +101,8 @@ class J2gravHelper
 				$content = '';
 				$content = "---\r";
 				$content .= "title: ". $item->title . "\r";
-				$content .= "tags: ". $tags . "\r";
+				if ($import_tags) { $content .= "tags: ". $tags . "\r"; }
+				if ($force_visibility_article) {  $content .= "visible: true\r"; }
 				$content .= "---\r";
 
 				/*
@@ -143,6 +147,7 @@ class J2gravHelper
 				$content = '';
 				$content = "---\r";
 				$content .= "title: ". $item->category_title . "\r";
+				if ($force_visibility_category) {  $content .= "visible: true\r"; }
 				$content .= "---\r";
 
 				if ( JFile::write($categoryFile, $content) ) {

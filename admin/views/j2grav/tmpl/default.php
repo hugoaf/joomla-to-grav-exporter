@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     0.2.0
+ * @version     0.3.0
  * @package     com_j2grav
  * @copyright   Copyright (C) 2011. All rights reserved.
  * @license     GNU/GPL
@@ -30,6 +30,16 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 	<label><b>Grav Template for categories?</b></label>
 	<input type="text" name="category_template" value="blog" />.md
+
+	<label><b>Import Joomla Article Tags</b></label>
+	<input type="checkbox" name="import_tags" />
+
+	<label><b>Force visibility for all articles</b></label>
+	<input type="checkbox" name="force_visibility_article" />
+
+	<label><b>Force visibility for all categories</b></label>
+	<input type="checkbox" name="force_visibility_category" />
+
 
 	<label><b>Joomla Language Tag?</b> If your Joomla article has language use it to create markdown file ie. default.<b>es</b>.md? </label> 
 	<select name="use_article_language" >
