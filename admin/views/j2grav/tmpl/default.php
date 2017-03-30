@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     0.3.0
+ * @version     0.4.0
  * @package     com_j2grav
  * @copyright   Copyright (C) 2011. All rights reserved.
  * @license     GNU/GPL
@@ -15,7 +15,6 @@ defined('_JEXEC') or die('Restricted access'); ?>
 <div class="alert alert-info">
 	<p>When click "Export Now" button, the plugin will get Joomla articles title, alias, category and tags, then will create a folder and markdown files for every article in your Joomla installation and will create a folder and markdown file for corresponding joomla category in the grav style.</p>
 	<p>* If you already exported your joomla files to grav, you should download and remove exported files, when using again it will not overwrite current exported	files.*</p>
-	<p>* Will not create nested categories *</p>
 	<p>Your GRAV pages will be stored in: <pre>/administrator/components/com_j2grav/exported</pre></p>
 	<p>When finished you should remove this component completely.</p>
 </div>
@@ -33,6 +32,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	<input type="text" name="category_template" value="blog" />.md
 
 	<label><input type="checkbox" name="import_tags" /><b>Import Joomla Article Tags</b></label>
+
+	<label><input type="checkbox" name="category_as_taxonomy" /> <b>Import Category as GRAV taxonomy</b></label>
 	
 	<label><input type="checkbox" name="force_visibility_article" /> <b>Force visibility for all articles</b></label>
 	
@@ -40,10 +41,15 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 	<label><input type="checkbox" name="use_article_language" /> <b>Use Joomla Language Tag?</b> If your Joomla article has language, use it to create markdown file ie. default.<b>es</b>.md? </label> 
 
-
-	<label><b>Manually Set Language?</b> If above is set to no, you can manually set one of your language code "es", "en", etc. (without quotes) to be applied to all your files, if no need just leave empty</label>
+	<label><b>Manually Set Language?</b> If Joomla language tag is discarded, you stil can manually set one of your language code "es", "en", etc. (without quotes) to be applied to all your files, if no need just leave empty</label>
 	<input type="text" name="language" value="" /> 
 
+	<label><b>Export Mode</b> Select how you need to treat Joomla categories, the best it fits for your GRAV site </label> 
+	<select name="categories_export_mode" >
+		<option value="0">All Joomla articles inside a common folder</option>
+		<option value="1">Every Joomla article inside its own category folder</option>
+		<option value="2">Nested categories as a full folder path</option>
+	</select>
 
 	<label><b>Content Format?</b> you could just leave the content as it is in joomla database, or Strip HTML tags, or convert to Markdown with the Markdownify library from https://github.com/Elephant418/Markdownify</label> 
 	<select name="content_format" >

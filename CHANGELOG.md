@@ -1,11 +1,23 @@
+# v0.4.0
+## 29/03/2017
+
+1. [](#feature)
+    * Option to export nested categories as folders
+2. [](#feature)
+	* Export article category as Grav Taxonomy
+	* Tags now are part of Grav Taxonomy and managed as array
+
+
 # v0.3.0
 ## 19/03/2017
 
 1. [](#feature)
     * Option to force visibility for articles and/or categories.
     * Ask if tags will be imported, before it was imported without asking.
-   [](#Bug)
+2.   [](#Bug)
     * Add Directory Separator to improve compatibility.
+
+
 
 # v0.2.0
 ## 19/03/2017

@@ -14,9 +14,7 @@ if($controller = JRequest::getWord('controller')) {
         $controller = '';
     }
 }
- 
- //echo JPATH_COMPONENT;
- 
+  
 // Create the controller
 $classname    = 'J2gravController'.$controller;
 $controller   = new $classname( );

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     0.3.0
+ * @version     0.4.0
  * @package     com_j2grav
  * @copyright   Copyright (C) 2011. All rights reserved.
  * @license     GNU/GPL
@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 
 
 /**
- * Rda helper.
+ * J2Grav helper.
  */
 class J2gravHelper
 {
@@ -37,17 +37,16 @@ class J2gravHelper
 		$force_visibility_article = $jinput->get('force_visibility_article', 0, 'BOOLEAN');
 		$force_visibility_category = $jinput->get('force_visibility_category', 0, 'BOOLEAN');
 		$language = $jinput->get('language', '', 'WORD');
+		$categories_export_mode = $jinput->get('categories_export_mode', 0, 'INT');
 
 		if ( $content_format == 'markdownify') {
 			require_once( JPATH_COMPONENT.DS.'vendor'.DS.'markdownify'.DS.''.DS.'src'.DS.'Markdownify'.DS.'Converter.php' );
 			require_once( JPATH_COMPONENT.DS.'vendor'.DS.'markdownify'.DS.''.DS.'src'.DS.'Markdownify'.DS.'Parser.php' );
 			$converter = new Markdownify\Converter;
-
 		}
 
-
 		if ($language) {
-			$language = '.'.$language;
+			$language = '.' . $language;
 		} else {
 			$language = '';
 		}
@@ -73,6 +72,7 @@ class J2gravHelper
 			// get item tags
 			$item_details->tagsArray = $item_details->tags->getItemTags('com_content.article',$item_details->id);
 			$tags = '';
+
 			foreach ($item_details->tagsArray as $tag) {
 				$tags.= $tag->title." ";
 			}
@@ -87,30 +87,41 @@ class J2gravHelper
 				}
 			}
 			
-			// get category alias
-			$db = JFactory::getDbo();
-			$db->setQuery("SELECT cat.alias FROM #__categories cat WHERE cat.id=".$item->catid);
-			$category_alias = $db->loadResult();
+			
+			switch ($categories_export_mode) {
+
+				case 1: 	// Each article in its own category folder
+					$category_path = self::getCategoryAlias($item->catid).DS;
+					break;
+
+				case 2: 	// Nested categories as folder paths
+					$category_path = self::getCategoryPath($item->catid);
+					break;
+				
+				default:	// No folder for categories
+					$category_path = ''
+					break;
+			}
+
 
 
 			// create markdown file for article
-			$articleFile = JPATH_COMPONENT.jFolder::makeSafe(DS.$export_folder_name.DS.$category_alias.DS.$item->alias.DS.$article_template.$language.'.md');
+			$articleFile = JPATH_COMPONENT.jFolder::makeSafe(DS.$export_folder_name.DS.$category_path.$item->alias.DS.$article_template.$language.'.md');
 			
 			if ( !JFile::exists($articleFile) ) {
 
 				$content = '';
 				$content = "---\r";
 				$content .= "title: ". $item->title . "\r";
-				if ($import_tags) { $content .= "tags: ". $tags . "\r"; }
+				if ($import_tags) {
+					$content .= "taxonomy:\r"; 
+					if ($tags) { $content .= "    tags: ". $tags . "\r"; }
+					if ($categories_as_taxonomy) { $content .= "    category: ". $tags . "\r"; }
+
+				}
 				if ($force_visibility_article) {  $content .= "visible: true\r"; }
 				$content .= "---\r";
 
-				/*
-				if ($item_details->introtext != $item_details->articletext) {
-					$content .= ($strip_tags) ? strip_tags($item_details->introtext) : $item_details->introtext;
-					$content .= "\r===\r";
-				} 
-				*/
 
 				// apply selected content format
 				switch ($content_format) {
@@ -141,7 +152,7 @@ class J2gravHelper
 
 
 			// create markdown file for category
-			$categoryFile = JPATH_COMPONENT.jFolder::makeSafe(DS.$export_folder_name.DS.$category_alias.DS.$category_template.$language.'.md');
+			$categoryFile = JPATH_COMPONENT.jFolder::makeSafe(DS.$export_folder_name.DS.$category_path.$category_template.$language.'.md');
 			
 			if ( !JFile::exists($categoryFile) ) {
 				$content = '';
@@ -163,14 +174,40 @@ class J2gravHelper
 
 		}
 
-		//$zip = new JArchiveZip();
-		//$zipFile = JPATH_COMPONENT.jFolder::makeSafe(DS.$export_folder_name.DS.'pages.zip');
-		//$zip->create($zipFile,$files));
 
 		JFactory::getApplication()->enqueueMessage( count($files)." files successfully created" );
 
 		return $files;		
 	}
+
+
+
+	protected static function getCategoryPath($cat_id)
+	{
+		$model_categories = JCategories::getInstance('Content');
+		$category = $model_categories->get($cat_id);
+		$parent = $category->getParent();
+
+		$path = self::getCategoryAlias($cat_id) . DS;
+			
+		if ($parent->id <> 'root'){
+			$path = self::getCategoryPath($parent->id) . $path;
+		}
+		
+		return $path;
+
+	}
+
+
+	protected static function getCategoryAlias($cat_id){
+		// get category alias
+		$db = JFactory::getDbo();
+		$db->setQuery("SELECT cat.alias FROM #__categories cat WHERE cat.id=".$cat_id);
+		$category_alias = $db->loadResult();
+		return $category_alias . DS;
+	}
+
+
 
 
 }
