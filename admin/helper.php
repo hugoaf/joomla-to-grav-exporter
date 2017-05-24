@@ -99,7 +99,7 @@ class J2gravHelper
 					break;
 				
 				default:	// No folder for categories
-					$category_path = ''
+					$category_path = '';
 					break;
 			}
 
